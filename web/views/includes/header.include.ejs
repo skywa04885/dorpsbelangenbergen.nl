@@ -1,0 +1,74 @@
+<header id="header" class="header">
+  <div class="header-tbar">
+    <div class="header-tbar__logo">
+      <a href="/">
+        <img src="/static/images/logo-klein.png" alt="Logo Dorpsbelangen" />
+      </a>
+      <h1>Dorpsbelangen Bergen</h1>
+    </div>
+    <div class="header-tbar__pictures"></div>
+  </div>
+  <div class="header-navbar">
+    <div class="header-navbar__items">
+      <ul class="header-navbar__items-ul">
+        <!-- Auto-generated navigation -->
+        <% nav.pages.forEach(page => { %>
+          <li class="header-navbar__items-ul__elem">
+            <a href="<%= page.href %>">
+              <%= page.title %>
+              <% if (page.sub_pages) { %>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <style xmlns="" class="darkreader darkreader--fallback">html, body, body :not(iframe) { background-color: #181a1b !important; border-color: #776e62 !important; color: #e8e6e3 !important; }</style>
+                    <path d="M0 0h24v24H0V0z" fill="none"/>
+                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                  </svg>
+                </span>
+              <% } %>
+            </a>
+            <% if (page.sub_pages) { %>
+              <ul class="header-navbar__items-ul__elem-subp">
+                <% page.sub_pages.forEach(subpage => { %>
+                  <li class="header-navbar__items-ul__elem-subp__elem">
+                    <a class="a-clear" href="<%= subpage.href %>"><%= subpage.title %></a>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+    <div class="header-navbar__search">
+      <button class="btn-clear header-navbar__search-btn" title="Open zoekbalk">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <style xmlns="" class="darkreader darkreader--fallback">html, body, body :not(iframe) { background-color: #181a1b !important; border-color: #776e62 !important; color: #e8e6e3 !important; }</style>
+          <path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="header-breadcrumb">
+    <div class="header-breadcrumb__name">
+      <h2 class="header-breadcrumb__name__tlt"><%= meta.title %></h2>
+    </div>
+    <div class="header-breadcrumb__list">
+      <ul class="header-breadcrumb__list-elems">
+        <% nav.breadcrumb.forEach(item => { %>
+          <li class="header-breadcrumb__list-elems__elem">
+            <a class="a-clear" href="<%= item.href %>"><%= item.title %></a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="scrollup">
+  <button class="btn-clear scrollup__button" id="scrollupButton" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+      <style xmlns="" class="darkreader darkreader--fallback">html, body, body :not(iframe) { background-color: #181a1b !important; border-color: #776e62 !important; color: #e8e6e3 !important; }</style>
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+    </svg>
+  </button>
+</div>

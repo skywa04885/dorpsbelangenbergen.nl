@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="<%= meta.lang %>">
+<head>
+  <%- include ('includes/head.include.ejs') %>
+</head>
+<body>
+  <div class="wrapper">
+    <%- include ('includes/header.include.ejs') %>
+    <div class="wrapper-main">
+      <form method="POST" class="form">
+        <fieldset class="form-fieldset">
+          <div class="form-fieldset__input">
+            <label>Voornaam <span>*</span></label>
+            <input name="voornaam" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Achternaam <span>*</span></label>
+            <input name="achternaam" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Idee <span>*</span></label>
+            <textarea name="idee" required rows="12"></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Verstuur</button>
+        </fieldset>
+      </form>
+    </div>
+    <%- include ('includes/footer.include.ejs') %>
+  </div>
+</body>
+</html>

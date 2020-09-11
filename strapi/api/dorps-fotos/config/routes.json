@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/dorps-fotos",
+      "handler": "dorps-fotos.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dorps-fotos/count",
+      "handler": "dorps-fotos.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dorps-fotos/:id",
+      "handler": "dorps-fotos.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/dorps-fotos",
+      "handler": "dorps-fotos.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/dorps-fotos/:id",
+      "handler": "dorps-fotos.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/dorps-fotos/:id",
+      "handler": "dorps-fotos.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

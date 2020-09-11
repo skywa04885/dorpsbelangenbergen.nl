@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nieuws_medias",
+  "info": {
+    "name": "Nieuws / Media items"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "item_titel": {
+      "type": "string"
+    },
+    "item_content": {
+      "type": "richtext"
+    },
+    "item_datum": {
+      "type": "datetime"
+    },
+    "item_images": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "item_thumbnail": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "nieuws_media_category": {
+      "model": "nieuws-media-categories"
+    }
+  }
+}

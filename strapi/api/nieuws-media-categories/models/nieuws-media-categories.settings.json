@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nieuws_media_categories",
+  "info": {
+    "name": "nieuws-media-categories"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "categorie_naam": {
+      "type": "string"
+    },
+    "categorie_in_navigatie": {
+      "type": "boolean"
+    }
+  }
+}

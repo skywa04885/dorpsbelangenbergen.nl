@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/nieuws-media-categories",
+      "handler": "nieuws-media-categories.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/nieuws-media-categories/count",
+      "handler": "nieuws-media-categories.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/nieuws-media-categories/:id",
+      "handler": "nieuws-media-categories.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/nieuws-media-categories",
+      "handler": "nieuws-media-categories.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/nieuws-media-categories/:id",
+      "handler": "nieuws-media-categories.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/nieuws-media-categories/:id",
+      "handler": "nieuws-media-categories.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

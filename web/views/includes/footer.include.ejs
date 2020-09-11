@@ -1,0 +1,67 @@
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__top-col">
+      <p class="footer__top-col-txtct">
+        <strong class="txtct-title">Dorpsbelangen Bergen</strong>
+      </p>
+      <ul class="footer__top-col-list">
+        <li class="footer__top-col-list__elem">
+          <a target="_blank" href="/hidden/admin-redirect">Administratie</a>
+        </li>
+        <li class="footer__top-col-list__elem">
+          <a href="/feed/">Nieuwsfeed</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer__top-col">
+      <p class="footer__top-col-txtct">
+        <strong class="txtct-title">Navigatie</strong>
+      </p>
+        <ul class="footer__top-col-list">
+          <!-- Auto-generated navigation -->
+          <% nav.pages.forEach(page => { %>
+            <li class="footer__top-col-list__elem">
+              <a href="<%= page.href %>"><%= page.title %></a>
+              <% if (page.sub_pages) { %>
+                <ul class="footer__top-col-list__elem-subp">
+                  <% page.sub_pages.forEach(subpage => { %>
+                    <li class="footer__top-col-list__elem-subp__elem">
+                      <a href="<%= subpage.href %>"><%= subpage.title %></a>
+                    </li>
+                  <% }) %>
+                </ul>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+    </div>
+    <div class="footer__top-col">
+      <p class="footer__top-col-txtct">
+        <strong class="txtct-title">Contact</strong>
+      </p>
+      <p class="footer__top-col-txtct">
+        Email: <a href="mailto:dorpsbelangenbergen@gmail.com">dorpsbelangenbergen@gmail.com</a>
+      </p>
+      <br />
+      <a class="a-clear btn btn-light" href="/contact">Vul formulier in</a>
+    </div>
+  </div>
+  <div class="footer__copyright">
+    <p class="footer__copyright-text">
+      &copy; <%= new Date().getFullYear() %> Dorpsbelangen Bergen, website door
+      <a target="_blank" href="https://me.fannst.nl/">Luke A.C.A. Rieff</a>
+    </p>
+  </div>
+</footer>
+<div id="loader" class="loader" style="display:none;">
+  <div class="loader-inner">
+    <div class="loader-inner__title">
+      <p>Pagina is aan het laden ...</p>
+    </div>
+    <div class="loader-inner__bar">
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<% scripts.forEach(script => { %><script src="/dist/scripts/<%= script + (dev ? '?dr=' + (Math.random() * 12).toString(16).substring(2) : '') %>"></script><% }) %>

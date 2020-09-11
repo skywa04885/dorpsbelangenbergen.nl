@@ -1,0 +1,26 @@
+
+<!-- 
+  @author: Luke A.C.A. Rieff
+  @project: Dorpsbelangen Bergen
+  @email: webmaster@fannst.nl
+-->
+
+<!-- Meta -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title><%= meta.title %> - Dorpsbelangen Bergen</title>
+
+<!-- SEO Tags -->
+<meta name="description" content="<%= meta.seo_description %>" />
+<meta name="keywords" content="<%= meta.seo_keywords %>" />
+<meta name="title" content="<%= meta.seo_title %>" />
+<meta name="author" content="<%= meta.seo_author %>" />
+<meta name="lang" content="<%= meta.lang %>" />
+<meta name="generator" content="<%= meta.seo_generator %>" />
+<% if (meta.seo_content) { %><meta name="content" content="<%= meta.seo_content %>" /><% } %>
+<!-- Stylesheets -->
+<% stylesheets.forEach(stylesheet => { %><link rel="stylesheet" href="/dist/styles/<%= stylesheet + (dev ? '?dr=' + (Math.random() * 12).toString(16).substring(2) : '') %>" />
+<% }) %> 
+<!-- CDN's -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">

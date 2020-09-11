@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="<%= meta.lang %>">
+<head>
+  <%- include ('includes/head.include.ejs') %>
+</head>
+<body>
+  <div class="wrapper">
+    <%- include ('includes/header.include.ejs') %>
+    <div class="wrapper-main">
+      <form method="POST" class="form">
+        <fieldset class="form-fieldset">
+          <div class="form-fieldset__input">
+            <label>Voornaam <span>*</span></label>
+            <input name="voornaam" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Voorletters <span>*</span></label>
+            <input name="voorletters" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Achternaam <span>*</span></label>
+            <input name="achternaam" type="text" required />
+          </div>
+          <hr />
+          <div class="form-fieldset__input">
+            <label>Adres <span>*</span></label>
+            <input name="adres" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Postcode <span>*</span></label>
+            <input name="postcode" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Plaats <span>*</span></label>
+            <input name="plaats" type="text" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Datum <span>*</span></label>
+            <input name="datum" type="date" required />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Telefoonnummer</label>
+            <input name="telefoonnummer" type="text" />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Mobiel telefoonnummer</label>
+            <input name="mobiel_telefoonnummer" type="text" />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Email <span>*</span></label>
+            <input name="email" type="email" required />
+          </div>
+          <hr />
+          <div class="form-fieldset__input">
+            <label>Raadslidmaatschap</label>
+            <input name="raadslidmaatschap" type="text" />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Bestuurlijke taak</label>
+            <input name="bestuurlijke_taak" type="text" />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Adviseur: specifieke kennis/ervaring ten dienste aan Dorpsbelangen</label>
+            <textarea name="specifiek" rows="12"></textarea>
+          </div>
+          <p class="form-fieldset__title">
+            <strong>Heeft u behoefte aan meer informatie, dat kan via een:</strong>
+          </p>
+          <div class="form-fieldset__input">
+            <label>Individueel gesprek (evt. met wie) </label>
+            <input name="individueel_gesprek" type="text" />
+          </div>
+          <div class="form-fieldset__input">
+            <label>Groepsgesprek</label>
+            <input name="groepsgesprek" type="text" />
+          </div>
+          <button class="btn btn-primary" type="submit">Verstuur</button>
+        </fieldset>
+      </form>
+    </div>
+    <%- include ('includes/footer.include.ejs') %>
+  </div>
+</body>
+</html>

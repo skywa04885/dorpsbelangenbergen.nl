@@ -1,0 +1,58 @@
+.nieuws-media-item {
+  & > .nieuws-media-item__banner {
+    height: 28rem;
+    background-position: center;
+    background-size: cover;
+    border-radius: 0.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  & > .nieuws-media-item__content {
+    margin-top: 2rem;
+    color: #6d6d6d;
+    font-size: 1rem;
+    display: block;
+    line-height: 1.4rem;
+    margin-bottom: 0.6rem;
+    font-family: 'Roboto', sans-serif;
+
+    & > p {
+      margin-bottom: 1rem;
+    }
+  }
+
+  & > .nieuws-media-item__title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.4rem;
+  }
+
+  &  > .nieuws-media-item__desc {
+    margin-bottom: 0.8rem;
+
+    & > li {
+      display: inline-block;
+      vertical-align: middle;
+
+      &:not(:first-child) {
+        margin-left: 0.4rem;
+      }
+
+      & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+        fill: #b8b8b8;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      & > span {
+        color: #b8b8b8;
+        display: inline-block;
+        vertical-align: middle;
+        font-style: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon dist/index.js",
+    "scss": "node-sass --output-style compressed --watch ./public/src/styles -o ./public/dist/styles"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/ejs": "^3.0.4",
+    "@types/express": "^4.17.8",
+    "@types/node": "^14.10.0",
+    "@types/showdown": "^1.9.3",
+    "@types/winston": "^2.4.4",
+    "axios": "^0.20.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "showdown": "^1.9.1",
+    "tsc": "^1.20150623.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dorps_fotos",
+  "info": {
+    "name": "Dorps foto's"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "foto_banner": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "foto_thumbnail": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "foto_beschijving": {
+      "type": "richtext"
+    }
+  }
+}
