@@ -39,10 +39,10 @@ const buildTemplateConfig = (title: string, vars: any = {}, config: {
                 {
                   title: 'Missie / Visie',
                   href: '/uw-partij/missie-visie'
-                }, {
+                }, /*{
                   title: 'Fractie / Commissie',
                   href: '/uw-partij/fractie-commissie'
-                }, {
+                },*/ {
                   title: 'Standpunten',
                   href: '/uw-partij/standpunten'
                 }, {

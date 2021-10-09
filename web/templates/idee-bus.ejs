@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <%- include('includes/head.ejs') %>
+        <style>
+            .wrapper__idee-data {
+                color: #3a3a3a;
+                font-size: 0.9rem;
+            }
+
+            .wrapper__idee-data > strong {
+                color: #222222;
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+
+            .wrapper__idee-data > em {
+                color: #4d4d4d;
+                font-style: italic;
+            }
+
+            .wrapper__idee-idee {
+                padding: 0.7rem;
+                border-radius: 0.2rem;
+                border: 1px solid #cecece;
+                color: #3a3a3a;
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <%- include('includes/header.ejs') %>
+            <div class="wrapper__idee wrapper__content">
+                <p class="wrapper__idee-data">
+                    <strong>Gegevens: </strong>
+                    <br />
+                    Voornaam: <em><%= voornaam %></em>
+                    <br />
+                    Achternaam: <em><%= achternaam %></em>
+                    <br />
+                    <strong>Idee: </strong>
+                </p>
+                <p class="wrapper__idee-idee">
+                    <%= idee %>
+                </p>
+            </div>
+            <%- include('includes/footer.ejs') %>
+        </div>
+    </body>
+</html>

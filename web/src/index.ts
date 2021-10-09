@@ -1,6 +1,7 @@
 import express from 'express';
 import winston from 'winston';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 import { createSimpleLogger } from './logger';
 import mainRoute from './routes/main.route';
@@ -17,6 +18,9 @@ logger.info(`Starting webserver on ${SERVER_BIND_ADDR}:${SERVER_PORT}`);
 // Creates the express app and sets some basic
 //  stuff like the static folder
 const app: express.Application = express();
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(express.static(PUBLIC_PATH));
 app.set('views', VIEWS_PATH);
 app.set('view engine', 'ejs');

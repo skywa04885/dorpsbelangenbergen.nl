@@ -16,9 +16,11 @@ Router.get('/nieuws-media', controller.GET_NieuwsMedia);
 Router.get('/nieuws-media/:id', controller.GET_NieuwsItem);
 
 Router.get('/ideebus', controller.GET_Ideebus);
+Router.post('/ideebus', controller.POST_IdeeBus);
 Router.get('/leden-pagina', controller.GET_LedenPagina);
 Router.get('/word-lid', controller.GET_WordLid);
 Router.get('/contact', controller.GET_Contact);
+Router.post('/contact', controller.POST_Contact);
 Router.get('/', controller.GET_Index);
 Router.get('*', controller.GET_PaginaNietGevonden);
 

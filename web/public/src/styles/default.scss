@@ -32,29 +32,53 @@ body, html {
     margin-bottom: 1rem;
     border-bottom: 1px solid #bbbbbb;
   }
+}
 
-  & > .wrapper-main__text {
-    color: #6d6d6d;
-    font-size: 1rem;
-    display: block;
-    line-height: 1.4rem;
-    margin-bottom: 0.6rem;
-    font-family: 'Roboto', sans-serif;
+.wrapper-main__list-dotted {
+  list-style-type: disc;
+}
 
-    & > a {
-      color: #006b92;
-      text-decoration: none;
+.wrapper-main__list {
+  & > .wrapper-main__list__element {
+    margin-left: 1.3rem;
+    margin-top: 0.4rem;
+  }
+}
 
-      &:hover {
-        text-decoration: underline;
-      }
+.wrapper-main__text.title {
+  font-size: 1.8rem;
+  color: #434343;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 1.2rem;
+  line-height: 1.8rem;
+}
+
+.wrapper-main__text.large {
+  font-size: 1.2rem;
+}
+
+.wrapper-main__text {
+  color: #6d6d6d;
+  font-size: 1rem;
+  display: block;
+  line-height: 1.4rem;
+  margin-bottom: 0.6rem;
+  font-family: 'Roboto', sans-serif;
+
+  & > a {
+    color: #006b92;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
     }
+  }
 
-    & > strong {
-      color: #333;
-      font-weight: bold;
-      font-family: 'Open Sans', sans-serif;
-    }
+  & > strong {
+    color: #333;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
   }
 }
 
@@ -118,6 +142,23 @@ body, html {
 // The forms
 
 .form {
+  & > .form-info{
+    margin-bottom: 2rem;
+    
+    & > p {
+      & > strong {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #3a3a3a;
+      }
+
+      & > em {
+        color: #474747;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
   & > .form-fieldset {
     & > p {
       color: #6d6d6d;

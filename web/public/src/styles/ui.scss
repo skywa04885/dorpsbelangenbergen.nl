@@ -278,6 +278,9 @@
             margin-top: 0.4rem;
 
             & > .footer__top-col-list__elem-subp__elem {
+              display: inline-block;
+              vertical-align: top;
+    
               & > a {
                 &::before {
                   margin-right: 0.2rem;

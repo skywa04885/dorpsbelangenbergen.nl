@@ -7,23 +7,84 @@
   <div class="wrapper">
     <%- include ('includes/header.include.ejs') %>
     <div class="wrapper-main">
-      <form method="POST" class="form">
-        <fieldset class="form-fieldset">
-          <div class="form-fieldset__input">
-            <label>Naam <span>*</span></label>
-            <input name="naam" type="text" required />
-          </div>
-          <div class="form-fieldset__input">
-            <label>E-Mail adres <span>*</span></label>
-            <input name="email" type="email" required />
-          </div>
-          <div class="form-fieldset__input">
-            <label>Bericht <span>*</span></label>
-            <textarea name="bericht" rows="12"></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit">Verstuur</button>
-        </fieldset>
-      </form>
+      <div class="wrapper-main-contact__content">
+        <!-- Contact form -->
+        <div class="wrapper-main-contact__content__left">
+          <form method="POST" class="form" id="contact">
+            <% if (query.status) { %>
+              <% if (query.status === 'success') { %>
+                <div class="form-info">
+                  <p>
+                    <strong>Bericht verzonden !</strong>
+                    <br />
+                    <em>Bedankt voor het opnemen van contact, 
+                      wij zullen zo snel mogelijk reageren</em>
+                  </p>
+                </div>  
+              <% } else if (query.status === 'sending-error') { %>
+                <div class="form-info">
+                  <p>
+                    <strong>Er is een fout opgetreden tijdens het versturen</strong>
+                    <br />
+                    <em>Uw E-Mail address is mogelijk niet correct, of bestaat niet. Als dit niet het geval
+                      is neem dan contact op met de webmaster.</em>
+                  </p>
+                </div>
+              <% } else if (query.status === 'templating-error') { %>
+                <div class="form-info">
+                  <p>
+                    <strong>Er is een fout opgetreden tijdens het opbouwen bericht</strong>
+                    <br />
+                    <em>Er is een template error opgetreden, neem aub contact op met de webmaster.</em>
+                  </p>
+                </div>
+              } else if (query.status === 'fields-missing') { %>
+                <div class="form-info">
+                  <p>
+                    <strong>Er ontbreken velden</strong>
+                    <br />
+                    <em>Wij hebben niet alle velden ontvangen, probeer aub opnieuw. Als dit nit werkt
+                      neem contact op met de webmaster.</em>
+                  </p>
+                </div>
+              <% } %>
+            <% } %>
+            <fieldset class="form-fieldset">
+              <div class="form-fieldset__input">
+                <label>Naam <span>*</span></label>
+                <input name="naam" type="text" required />
+              </div>
+              <div class="form-fieldset__input">
+                <label>E-Mail adres <span>*</span></label>
+                <input name="email" type="email" required />
+              </div>
+              <div class="form-fieldset__input">
+                <label>Bericht <span>*</span></label>
+                <textarea name="bericht" rows="12"></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Verstuur</button>
+            </fieldset>
+          </form>
+        </div>
+        <!-- Contact info -->
+        <div class="wrapper-main-contact__content__right">
+          <p class="wrapper-main-contact__content__right__title">
+            <strong>Contactpersoon</strong>
+            <br />
+            Patrick Robben
+          </p>
+          <img
+            class="wrapper-main-contact__content__right__img"
+            src="/static/images/contact/contactpersoon.png" />
+          <p class="wrapper-main-contact__content__right__info">
+            <strong>Tel: </strong>
+            <a href="tel:+31630021136">+31 6 30021136</a>
+            <br />
+            <strong>Email: </strong>
+            <a href="mailto:patrick.robben@online.nl">patrick.robben@online.nl</a>
+          </p>
+        </div>
+      </div>
     </div>
     <%- include ('includes/footer.include.ejs') %>
   </div>

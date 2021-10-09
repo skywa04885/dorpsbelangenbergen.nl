@@ -6,11 +6,77 @@
 <body>
   <div class="wrapper">
     <%- include ('includes/header.include.ejs') %>
-    <div class="wrapper-main">
-      <h3>Hier volgt de lijst met leden: </h3>
-      <p class="wrapper-main__text">
-
-      </p>
+    <div class="wrapper-main wrapper-main-ledenpagina">
+      <!-- Page content -->
+      <div class="wrapper-main-ledenpagina-top">
+        <ul class="wrapper-main-ledenpagina-top__list">
+          <li class="wrapper-main-ledenpagina-top__list-item">
+            <a class="btn btn-primary">Politiek Gemeente Bergen</a>
+          </li>
+        </ul>
+      </div>
+      <hr />
+      <div class="wrapper-main-ledenpagina-bottom">
+        <div class="wrapper-main-ledenpagina-bottom__left">
+          <p class="wrapper-main-ledenpagina-bottom__left__text">
+            <strong>Dorpen</strong>
+          </p>
+          <img class="wrapper-main-ledenpagina-bottom__left-img" src="/static/images/ledenpagina/map.jpg" usemap="#image-map">
+          <map name="image-map">
+              <area target="" alt="Well" title="Well" href="" coords="77,198,96,215,133,220,160,214,158,201,177,200,167,183,148,165,143,148,137,151,108,148,109,156,102,163,96,161,88,158,74,168,64,162,61,180,69,193" shape="poly">
+              <area target="" alt="Wellerlooi" title="Wellerlooi" href="" coords="181,286,210,287,225,281,216,253,197,238,191,232,181,197,159,200,157,207,166,214,151,215,134,226,136,241,155,262,172,270" shape="poly">
+              <area target="" alt="Afferden" title="Afferden" href="" coords="9,61,33,46,47,38,57,40,64,34,67,41,67,47,74,49,85,49,91,59,95,73,96,82,89,89,64,86,74,104,63,109,54,106,49,94,29,76" shape="poly">
+              <area target="" alt="Siebengewald" title="Siebengewald" href="" coords="99,81,108,86,114,90,122,102,130,85,135,66,145,61,142,49,130,44,124,47,117,43,102,34,78,23,64,18,58,26,68,39,67,46,85,49,95,61,97,71" shape="poly">
+              <area target="" alt="Nieuw Bergen" title="Nieuw Bergen" href="" coords="83,155,83,148,79,141,77,133,70,127,69,119,63,112,75,103,66,86,87,91,103,81,117,88,122,101,117,125,133,141,140,147,135,154,110,149,106,160,102,164,96,159,89,162" shape="poly">
+              <area target="" alt="Aijen" title="Aijen" href="" coords="55,138,62,135,72,135,79,143,83,154,78,163,71,166,63,163,65,155,58,148" shape="poly">
+              <area target="" alt="Bergen" title="Bergen" href="" coords="53,107,58,111,65,114,69,124,71,130,65,134,59,137,52,140,51,120" shape="poly">
+          </map>
+        </div>
+        <!-- Navigation -->
+        <div class="wrapper-main-ledenpagina-bottom__right">
+          <p class="wrapper-main-ledenpagina-bottom__right__text">
+            <strong>Thema's</strong>
+          </p>
+          <ul class="wrapper-main-ledenpagina-bottom__right__subjects">
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Veiligheid</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Welzijn en Zorg</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Jeugd en Jongeren</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Werk en Inkomen</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Groen en Openbare Ruimte</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Economie en Bedrijfsleven</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Millieu en Duurzaamheid</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Verkeer, Vervoer en Infrastructuur</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Onderwijs</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Cultuur en Sport</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Bouwen en Wonen</a>
+            </li>
+            <li class="wrapper-main-ledenpagina-bottom__right__subjects__subj">
+              <a>Recreatie en Tourisme</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <%- include ('includes/footer.include.ejs') %>
   </div>

@@ -7,7 +7,44 @@
   <div class="wrapper">
     <%- include ('includes/header.include.ejs') %>
     <div class="wrapper-main">
-      <form method="POST" class="form">
+      <form target="/ideebus" method="POST" class="form">
+        <% if (query.status) { %>
+          <% if (query.status === 'success') { %>
+            <div class="form-info">
+              <p>
+                <strong>Idee verzonen !</strong>
+                <br />
+                <em>Bedankt voor het verzenden van uw idee</em>
+              </p>
+            </div>  
+          <% } else if (query.status === 'sending-error') { %>
+            <div class="form-info">
+              <p>
+                <strong>Er is een fout opgetreden tijdens het versturen</strong>
+                <br />
+                <em>Het idee kon niet worden verzonden, neem aub contact op
+                  met de webmaster</em>
+              </p>
+            </div>
+          <% } else if (query.status === 'templating-error') { %>
+            <div class="form-info">
+              <p>
+                <strong>Er is een fout opgetreden tijdens het opbouwen bericht</strong>
+                <br />
+                <em>Er is een template error opgetreden, neem aub contact op met de webmaster.</em>
+              </p>
+            </div>
+          } else if (query.status === 'fields-missing') { %>
+            <div class="form-info">
+              <p>
+                <strong>Er ontbreken velden</strong>
+                <br />
+                <em>Wij hebben niet alle velden ontvangen, probeer aub opnieuw. Als dit nit werkt
+                  neem contact op met de webmaster.</em>
+              </p>
+            </div>
+          <% } %>
+        <% } %>
         <fieldset class="form-fieldset">
           <div class="form-fieldset__input">
             <label>Voornaam <span>*</span></label>

@@ -1,11 +1,25 @@
 import express from 'express';
 import winston from 'winston';
+import path from 'path';
+import ejs from 'ejs';
+import nodemailer from 'nodemailer';
+import url from 'url';
 
 import { buildTemplateConfig } from '../render';
 import { NieuwsMediaItem, NieuwsMediaCategorie } from '../api/nieuws-media.api';
 import { createSimpleLogger } from '../logger';
 
 const logger: winston.Logger = createSimpleLogger('main_controller');
+const transporterFrom: string = 'noreply@fannst.nl';
+const transporter = nodemailer.createTransport({
+  host: 'fannst.nl',
+  port: 25,
+  secure: false,
+  auth: {
+    user: transporterFrom,
+    pass: 'qH!GQfC=Umehs49X@&97n5mvChSgq*fEms@3geqmdj'
+  }
+});
 
 const GET_Index = (
   req: express.Request, res: express.Response, 
@@ -116,7 +130,8 @@ const GET_LedenPagina = (
         title: 'Ledenpagina',
         href: '/leden-pagina'
       }
-    ]
+    ],
+    stylesheets: [ 'ledenpagina.css' ]
   }).then(data => {
     res.render('leden-pagina.view.ejs', data);
   });
@@ -126,7 +141,11 @@ const GET_Ideebus = (
   req: express.Request, res: express.Response, 
   next: express.NextFunction
 ) => {
-  buildTemplateConfig('Ideeënbus', null, {
+  const query = url.parse(req.url, true).query;
+
+  buildTemplateConfig('Ideeënbus', {
+    query
+  }, {
     breadcrumb: [
       {
         title: 'Ideeënbus',
@@ -159,15 +178,136 @@ const GET_Contact = (
   req: express.Request, res: express.Response, 
   next: express.NextFunction
 ) => {
-  buildTemplateConfig('Contact', null, {
+  const query = url.parse(req.url, true).query;
+
+  buildTemplateConfig('Contact', {
+    query
+  }, {
     breadcrumb: [
       {
         title: 'Contact',
         href: '/contact'
       }
-    ]
+    ],
+    scripts: [ 'contact.js' ],
+    stylesheets: [ 'contact.css' ]
   }).then(data => {
     res.render('contact.view.ejs', data);
+  });
+};
+
+const POST_WordLid = (
+  req: express.Request, res: express.Response, 
+  next: express.NextFunction
+) => {
+  const {
+    voornaam, voorletters, achternaam,
+    adres, postcode, plaats, datum, telefoonnummer,
+    mobiel_telefoonnummer, email, raadslidmaatschap,
+    bestuurlijke_taak, specifiek, individueel_gesprek,
+    groepsgesprek
+  } = req.body;
+};
+
+const POST_IdeeBus = (
+  req: express.Request, res: express.Response, 
+  next: express.NextFunction
+) => {
+  const { voornaam, achternaam, idee } = req.body;
+  
+  // Checks if any of the values is missing
+  if (!voornaam || !achternaam || !idee) {
+    return res.redirect(301, '/ideebus?status=fields-missing');
+  }
+
+  const headers: any = {
+    'X-Mailer': `Nodemailer, WebAPI (${req.headers["user-agent"] + '; ' ?? ''}for=${req.connection.remoteAddress})`,
+    'X-Fannst-Flags': 'mailer=nerror; db=nstore'
+  }
+
+  // Sends the message to the receiver
+  const subject = `Nieuw idee ontvangen van: ${voornaam} ${achternaam}`;
+  ejs.renderFile(path.join(process.cwd(), 'templates', 'idee-bus.ejs'), {
+    title: subject,
+    voornaam, achternaam, idee
+  }, (err, html) => {
+    if (err) {
+      winston.error(err);
+      return res.redirect(301, '/ideebus?status=templating-error');
+    }
+
+    transporter.sendMail({
+      subject: subject, headers, html,
+      from: transporterFrom,
+      to: 'info@dorpsbelangenbergen.nl'
+    }).then(info => {
+      res.redirect(301, '/ideebus?status=success');
+    }).catch(err => {
+      winston.error(err);
+      res.redirect(301, '/ideebus?status=sending-error');
+    });
+  });
+}
+
+const POST_Contact = (
+  req: express.Request, res: express.Response, 
+  next: express.NextFunction
+) => {
+  const { naam, email, bericht } = req.body;
+
+  // Checks if the required fields are present
+  if (!naam || !email || !bericht) {
+    return res.redirect(301, '/contact?status=fields-missing');
+  }
+
+  const headers: any = {
+    'X-Mailer': `Nodemailer, WebAPI (${req.headers["user-agent"] + '; ' ?? ''}for=${req.connection.remoteAddress})`,
+    'X-Fannst-Flags': 'mailer=nerror; db=nstore'
+  }
+
+  // Sends the client message, this will be sent to the person
+  //  who contacted us
+  const clientSubject = `Wij hebben uw bericht ontvangen: '${naam}'`;
+  ejs.renderFile(path.join(process.cwd(), 'templates', 'contact.ejs'), {
+    title: clientSubject,
+    naam, bericht, email
+  }, (err, html) => {
+    if (err) {
+      winston.error(err);
+      return res.redirect(301, '/contact?status=templating-error');
+    }
+
+    transporter.sendMail({
+      subject: clientSubject, headers, html,
+      from: transporterFrom,
+      to: email
+    }).then(info => {
+      // Sends the email to the admin of dorpsbelangenbergen
+      const receiverSubject = `${naam} heeft contact opgenomen !`;
+      ejs.renderFile(path.join(process.cwd(), 'templates', 'contact.ejs'), {
+        title: receiverSubject,
+        naam, bericht, email
+      }, (err, html) => {
+        if (err) {
+          winston.error(err);
+          return res.redirect(301, '/contact?status=templating-error');
+        }
+
+        transporter.sendMail({
+          subject: receiverSubject, headers, html,
+          from: transporterFrom,
+          to: 'info@dorpsbelangenbergen.nl'
+        }).then(info => {
+          res.redirect(301, '/contact?status=success');
+        }).catch(err => {
+          winston.error(err);
+          res.redirect(301, '/contact?status=sending-error');
+        });
+      });
+    }).catch(err => {
+      winston.error(err);
+      res.redirect(301, '/contact?status=sending-error');
+    });
   });
 };
 
@@ -238,10 +378,12 @@ const GET_PaginaNietGevonden = (
   });
 };
 
+
+
 export { 
   GET_Index, GET_UwPartij, GET_UwPartij_MissieVisie,
   GET_UwPartij_FractieCommissie, GET_UwPartij_Standpunten,
   GET_UwPartij_Dorpen, GET_LedenPagina, GET_PaginaNietGevonden,
   GET_NieuwsMedia, GET_NieuwsItem, GET_Ideebus, GET_WordLid,
-  GET_Contact
+  GET_Contact, POST_Contact, POST_IdeeBus
 };
