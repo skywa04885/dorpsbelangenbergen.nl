@@ -18,7 +18,14 @@ const buildTemplateConfig = (title: string, vars: any = {}, config: {
           seo_generator: 'NodeJS with Strapi CMS',
           lang: 'nl'
         },
-        scripts: [ 'default.js' ].concat(config.scripts ?? []),
+        scripts: ((config.scripts ?? []).concat ([ 'default.js' ]).map (script => {
+          if (script.startsWith ("http://") || script.startsWith ("https://"))
+          {
+            return script;
+          }
+
+          return '/dist/scripts/' + script + (Config.dev ? '?dr=' + (Math.random() * 12).toString(16).substring(2) : '');
+        })),
         stylesheets: [ 'reset.css', 'default.css', 'ui.css' ].concat(config.stylesheets ?? []),
         dev: Config.dev,
         nav: {
@@ -59,7 +66,7 @@ const buildTemplateConfig = (title: string, vars: any = {}, config: {
               sub_pages: nm_categ.filter(categ => categ.m_CategorieInNavigatie).map(categ => {
                 return {
                   title: categ.m_CategorieNaam,
-                  href: `/nieuws-media?cat=${categ.m_CategorieNaam}`
+                  href: `/nieuws-media?cat=${categ.m_CategorieID}`
                 }
               })
             }, {
@@ -71,6 +78,9 @@ const buildTemplateConfig = (title: string, vars: any = {}, config: {
             }, {
               title: 'Contact',
               href: '/contact'
+            }, {
+              title: 'Doneren',
+              href: '#donate'
             }
           ]
         }

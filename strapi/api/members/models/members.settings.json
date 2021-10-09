@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "members",
+  "info": {
+    "name": "Member",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "address": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "postal": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "town": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "private": true,
+      "required": false
+    },
+    "mobile": {
+      "type": "string",
+      "required": false,
+      "private": true
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false,
+      "required": true,
+      "private": true
+    },
+    "notes": {
+      "type": "richtext",
+      "private": true
+    },
+    "first_name": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "middle_name": {
+      "type": "string",
+      "private": true
+    },
+    "last_name": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}

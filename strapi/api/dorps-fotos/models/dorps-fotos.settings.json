@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "dorps_fotos",
   "info": {
-    "name": "Dorps foto's"
+    "name": "Town Picture"
   },
   "options": {
     "increments": true,

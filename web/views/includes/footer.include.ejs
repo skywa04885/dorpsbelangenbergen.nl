@@ -47,9 +47,17 @@
     </div>
   </div>
   <div class="footer__copyright">
+    <form action="https://www.paypal.com/donate" id="donate" method="post" target="_top">
+      <input type="hidden" name="hosted_button_id" value="M6SG6UPB8NY9Y" />
+      <input type="image" src="https://www.paypalobjects.com/nl_NL/NL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+      <img alt="" border="0" src="https://www.paypal.com/nl_NL/i/scr/pixel.gif" width="1" height="1" />
+    </form>
+    <br />
     <p class="footer__copyright-text">
       &copy; <%= new Date().getFullYear() %> Dorpsbelangen Bergen, website door
-      <a target="_blank" href="https://software.fannst.nl/">Fannst Software</a>
+      <a target="_blank" href="https://me.fannst.nl/">Luke Rieff</a>
+      <br /><br />
+      <a target="_blank" href="http://localhost:1337/">[ Strapi ]</a>
     </p>
   </div>
 </footer>
@@ -64,4 +72,4 @@
     </div>
   </div>
 </div>
-<% scripts.forEach(script => { %><script src="/dist/scripts/<%= script + (dev ? '?dr=' + (Math.random() * 12).toString(16).substring(2) : '') %>"></script><% }) %>
+<% scripts.forEach(script => { %><script src="<%= script %>"></script><% }) %>

@@ -10,14 +10,14 @@ import { NieuwsMediaItem, NieuwsMediaCategorie } from '../api/nieuws-media.api';
 import { createSimpleLogger } from '../logger';
 
 const logger: winston.Logger = createSimpleLogger('main_controller');
-const transporterFrom: string = 'noreply@fannst.nl';
+const transporterFrom: string = 'webmaster@fannst.nl';
 const transporter = nodemailer.createTransport({
   host: 'fannst.nl',
   port: 25,
   secure: false,
   auth: {
     user: transporterFrom,
-    pass: 'qH!GQfC=Umehs49X@&97n5mvChSgq*fEms@3geqmdj'
+    pass: 'Ffeirluke234'
   }
 });
 
@@ -207,6 +207,17 @@ const POST_WordLid = (
     bestuurlijke_taak, specifiek, individueel_gesprek,
     groepsgesprek
   } = req.body;
+
+  // Checks if any of the fields is missing.
+  if (
+    !voornaam || !voorletters || !achternaam || !adres ||
+    !postcode || !plaats || !datum || !telefoonnummer ||
+    !mobiel_telefoonnummer || !email || !raadslidmaatschap ||
+    !bestuurlijke_taak || !specifiek || !individueel_gesprek ||
+    !groepsgesprek
+  ) {
+    return res.redirect (301, '/word-lid')
+  }
 };
 
 const POST_IdeeBus = (
@@ -218,11 +229,6 @@ const POST_IdeeBus = (
   // Checks if any of the values is missing
   if (!voornaam || !achternaam || !idee) {
     return res.redirect(301, '/ideebus?status=fields-missing');
-  }
-
-  const headers: any = {
-    'X-Mailer': `Nodemailer, WebAPI (${req.headers["user-agent"] + '; ' ?? ''}for=${req.connection.remoteAddress})`,
-    'X-Fannst-Flags': 'mailer=nerror; db=nstore'
   }
 
   // Sends the message to the receiver
@@ -237,7 +243,7 @@ const POST_IdeeBus = (
     }
 
     transporter.sendMail({
-      subject: subject, headers, html,
+      subject: subject, html,
       from: transporterFrom,
       to: 'info@dorpsbelangenbergen.nl'
     }).then(info => {
@@ -311,25 +317,34 @@ const POST_Contact = (
   });
 };
 
-const GET_NieuwsMedia = (
+const GET_NieuwsMedia = async (
   req: express.Request, res: express.Response, 
   next: express.NextFunction
 ) => {
-  NieuwsMediaItem.fetchAll(0, 20).then(nieuws_media => {
-    buildTemplateConfig('Nieuws / Media', {
-      nieuws_media
-    }, {
-      breadcrumb: [
-        {
-          title: 'Nieuws / Media',
-          href: '/nieuws-media'
-        }
-      ],
-      stylesheets: [ 'nieuws-media.css' ]
-    }).then(data => {
-      res.render('nieuws-media.view.ejs', data);
-    });
-  }).catch(err => console.error(err));
+  const parsedUrl : url.UrlWithParsedQuery = url.parse (req.url, true);
+  const categoryID : number | undefined = parsedUrl.query.cat ? parseInt (<string> parsedUrl.query.cat) : undefined;
+  const start : number = parsedUrl.query.s ? parseInt (<string> parsedUrl.query.s) : 0;
+  const end : number = parsedUrl.query.e ? parseInt (<string> parsedUrl.query.e) : 10;
+
+  const nieuwsMediaCount : number = await NieuwsMediaItem.count ();
+  const nieuwsMedia : NieuwsMediaItem[] = await NieuwsMediaItem.fetchAll (start, end, categoryID);
+
+  buildTemplateConfig('Nieuws / Media', {
+    nieuws_media: nieuwsMedia,
+    nieuwsMediaCount,
+    categoryID,
+    start
+  }, {
+    breadcrumb: [
+      {
+        title: 'Nieuws / Media',
+        href: '/nieuws-media'
+      }
+    ],
+    stylesheets: [ 'nieuws-media.css' ]
+  }).then(data => {
+    res.render('nieuws-media.view.ejs', data);
+  });
 };
 const GET_NieuwsItem = (
   req: express.Request, res: express.Response, 
@@ -377,8 +392,6 @@ const GET_PaginaNietGevonden = (
     res.render('error.view.ejs', data);
   });
 };
-
-
 
 export { 
   GET_Index, GET_UwPartij, GET_UwPartij_MissieVisie,

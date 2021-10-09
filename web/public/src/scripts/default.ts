@@ -6,6 +6,16 @@ document.onreadystatechange = () => {
     scrollupButton.addEventListener('click', () => window.scrollTo(0, 0));
 
     document.querySelectorAll('a').forEach(a => {
+      if (a.getAttribute ('href')?.startsWith ('#'))
+      {
+        return;
+      }
+
+      if (a.target === '_blank')
+      {
+        return;
+      }
+
       a.addEventListener('click', e => {
         const target: HTMLAnchorElement = <HTMLAnchorElement>(e.target);
 

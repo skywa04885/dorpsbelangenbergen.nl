@@ -25,7 +25,12 @@ export class User {
     this.m_Role = m_Role;
   }
 
-  public static fromMap = (map: any): User => {
+  public static fromMap = (map: any): User | null => {
+    if (!map)
+    {
+      return null;
+    }
+
     return new User(
       map['id'],
       map['username'],

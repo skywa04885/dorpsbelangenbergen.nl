@@ -5,27 +5,28 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon dist/index.js",
-    "scss": "node-sass --watch --output-style compressed ./public/src/styles -o ./public/dist/styles"
+    "scss-dev": "node-sass --output-style compressed --watch ./public/src/styles -o ./public/dist/styles",
+    "scss": "node-sass --output-style compressed ./public/src/styles -o ./public/dist/styles",
+    "ts": "tsc --watch"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
-    "@types/body-parser": "^1.19.0",
     "@types/ejs": "^3.0.4",
     "@types/express": "^4.17.8",
     "@types/node": "^14.10.0",
-    "@types/nodemailer": "^6.4.0",
+    "@types/nodemailer": "^6.4.4",
     "@types/showdown": "^1.9.3",
     "@types/winston": "^2.4.4",
     "axios": "^0.20.0",
-    "body-parser": "^1.19.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "nodemailer": "^6.4.11",
+    "nodemailer": "^6.6.5",
     "showdown": "^1.9.1",
     "tsc": "^1.20150623.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "typescript": "^4.4.3",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4"
   }

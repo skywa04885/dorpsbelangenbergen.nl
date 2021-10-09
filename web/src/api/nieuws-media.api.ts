@@ -11,20 +11,20 @@ export class NieuwsMediaItem {
   public m_ItemTitel: string;
   public m_ItemContent: string;
   public m_ItemDate: Date;
-  public m_Categorie: NieuwsMediaCategorie;
+  public m_Categorie: NieuwsMediaCategorie | null;
   public m_ItemImages: Image[];
   public m_ItemThumbnail: Image;
-  public m_User: User;
+  public m_User: User | null;
   public m_ID: number;
 
   public constructor(
     m_ItemTitel: string,
     m_ItemContent: string,
     m_ItemDate: Date,
-    m_Categorie: NieuwsMediaCategorie,
+    m_Categorie: NieuwsMediaCategorie | null,
     m_ItemImages: Image[],
     m_ItemThumbnail: Image,
-    m_User: User,
+    m_User: User | null,
     m_ID: number
   ) {
     this.m_ItemTitel = m_ItemTitel;
@@ -63,15 +63,24 @@ export class NieuwsMediaItem {
     });
   };
 
-  public static fetchAll = (start: number, limit: number): Promise<NieuwsMediaItem[]> => {
-    return new Promise<NieuwsMediaItem[]>((resolve, reject) => {
-      axios.get(Config.buildURI(`/nieuws-medias?_sort=item_datum:DESC&_start=${start}&_limit=${limit}`)).then(response => {
-        if (response.status !== 200)
-          return reject(`${response.status}: ${response.statusText}`);
-        
-        resolve(response.data.map((map: any) => NieuwsMediaItem.fromMap(map)));
-      }).catch(err => reject(err));
-    });
+  public static async count (): Promise <number> {
+    const response = await axios.get (Config.buildURI ('/nieuws-medias/count'));
+    if (response.status !== 200)
+    {
+      throw new Error(`${response.status}: ${response.statusText}`);
+    }
+
+    return parseInt (response.data);
+  };
+
+  public static async fetchAll (start: number, limit: number, category : number | undefined): Promise<NieuwsMediaItem[]> {
+    const response = await axios.get (Config.buildURI(`/nieuws-medias?_sort=item_datum:DESC&_start=${start}&_limit=${limit}${category !== undefined ? '&nieuws_media_category=' + category : ''}`));
+    if (response.status !== 200)
+    {
+      throw new Error(`${response.status}: ${response.statusText}`);
+    }
+
+    return response.data.map((map: any) => NieuwsMediaItem.fromMap(map));
   };
 }
 
@@ -89,7 +98,12 @@ export class NieuwsMediaCategorie {
     this.m_CategorieID = m_CategorieID;
   }
 
-  public static fromMap = (map: any): NieuwsMediaCategorie => {
+  public static fromMap = (map: any): NieuwsMediaCategorie | null => {
+    if (!map)
+    {
+      return null;
+    }
+    
     return new NieuwsMediaCategorie(
       map['categorie_naam'],
       map['categorie_in_navigatie'],

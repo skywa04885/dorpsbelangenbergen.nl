@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "nieuws_media_categories",
   "info": {
-    "name": "nieuws-media-categories"
+    "name": "News / Media Category"
   },
   "options": {
     "increments": true,
