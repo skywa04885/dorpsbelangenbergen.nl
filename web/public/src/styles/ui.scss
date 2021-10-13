@@ -36,8 +36,12 @@
         & > .header-navbar__items-ul__elem {
           border: 1px solid transparent;
           position: relative;
-          display: inline-block;
           transition: all .12s;
+
+          @media only screen and (min-width: 900px)
+          {
+          display: inline-block;
+          }
 
           &:not(:first-child) {
             margin-left: 0.2rem;
@@ -80,30 +84,53 @@
           }
 
           & > .header-navbar__items-ul__elem-subp {
-            opacity: 0;
-            pointer-events: none;
-            user-select: none;
-            position: absolute;
-            transform: translateX(1rem);
-            background-color: #fff;
-            transition: all .12s;
-            border: 1px solid #e0e0e0;
-            border-radius: 0.2rem;
-            min-width: 180px;
-            box-shadow: 0 0.05rem 0.3rem rgba(#000, .2);
+            @media only screen and (min-width: 900px)
+            {
+              opacity: 0;
+              pointer-events: none;
+              user-select: none;
+              position: absolute;
+              transform: translateX(1rem);
+              background-color: #fff;
+              transition: all .12s;
+              border: 1px solid #e0e0e0;
+              border-radius: 0.2rem;
+              min-width: 180px;
+              box-shadow: 0 0.05rem 0.3rem rgba(#000, .2);
 
-            & > .header-navbar__items-ul__elem-subp__elem {              
-              &:hover {
-                background-color: #f1f1f1;
+              & > .header-navbar__items-ul__elem-subp__elem {              
+                &:hover {
+                  background-color: #f1f1f1;
+                }
+
+                & > a {
+                  padding: 0.4rem 0.7rem;
+                  font-weight: normal;
+                  font-family: 'Roboto', sans-serif;
+                  color: #006b92;
+                  display: block;
+                  font-size: 0.9rem;
+                }
               }
+            }
 
-              & > a {
-                padding: 0.4rem 0.7rem;
-                font-weight: normal;
-                font-family: 'Roboto', sans-serif;
-                color: #006b92;
+            @media only screen and (max-width: 900px)
+            {
+              & > .header-navbar__items-ul__elem-subp__elem {
                 display: block;
-                font-size: 0.9rem;
+                padding: 0.4rem;
+
+                & > a {
+                  padding: 0.4rem 0.7rem;
+                  font-weight: normal;
+                  font-family: 'Roboto', sans-serif;
+                  color: #fff;
+                  font-size: 0.9rem;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
               }
             }
           }

@@ -21,11 +21,17 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const GET_Index = (
+const GET_Index = async (
   req: express.Request, res: express.Response, 
   next: express.NextFunction
 ) => {
-  buildTemplateConfig('Home').then((data: any) => res.render('index.view.ejs', data));
+  const nieuwsMedia : NieuwsMediaItem[] = await NieuwsMediaItem.fetchAll (0, 20, undefined);
+
+  buildTemplateConfig('Home', {
+    nieuwsMedia
+  }, {
+    stylesheets: [ 'index.css' ]
+  }).then((data: any) => res.render('index.view.ejs', data));
 };
 
 const GET_UwPartij = (
@@ -393,10 +399,17 @@ const GET_PaginaNietGevonden = (
   });
 };
 
+const GET_Hidden_AdminRedirect = (
+  req: express.Request, res: express.Response, 
+  next: express.NextFunction
+) => {
+  res.redirect (`http://${req.hostname}:1337/admin`);
+};
+
 export { 
   GET_Index, GET_UwPartij, GET_UwPartij_MissieVisie,
   GET_UwPartij_FractieCommissie, GET_UwPartij_Standpunten,
   GET_UwPartij_Dorpen, GET_LedenPagina, GET_PaginaNietGevonden,
   GET_NieuwsMedia, GET_NieuwsItem, GET_Ideebus, GET_WordLid,
-  GET_Contact, POST_Contact, POST_IdeeBus
+  GET_Contact, POST_Contact, POST_IdeeBus, GET_Hidden_AdminRedirect
 };

@@ -103,6 +103,10 @@ body, html {
   cursor: pointer;
 }
 
+.btn-rounded {
+  border-radius: 1rem;
+}
+
 .btn.btn-dark {
   background-color: #333;
   color: #fff;
@@ -135,6 +139,18 @@ body, html {
 
   &:hover {
     background-color: #222222;
+    color: #fff;
+  }
+}
+
+.btn.btn-light-hover-red {
+  background-color: #fff;
+  color: #333;
+  transition: all .12s;
+  border: 1px solid rgba(#fff, 0.3);
+
+  &:hover {
+    background-color: #ff0000;
     color: #fff;
   }
 }

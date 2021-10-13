@@ -8,15 +8,84 @@
     <%- include ('includes/header.include.ejs') %>
     <div class="wrapper-main">
       <p class="wrapper-main__text">
-        Welkom op de website van Dorpsbelangen Bergen Limburg, dé no-nonsense partij voor een sterke, 
-        zorgzame en groene gemeente Bergen met een schoon, bruisend en veilig leefmilieu.
+        Welkom op de website van Dorpsbelangen Bergen Limburg, dé no-nonsense partij voor een
+sterke zorgzame en groene gemeente Bergen met een schoon, bruisend en veilig leefmilieu.
       </p>
       <p class="wrapper-main__text">
-        Deze website is nog onder constrcutie ...
+        Dorpsbelangen Bergen is in 2019 opgericht met als doel om deel te nemen aan de
+gemeenteraadsverkiezingen van 2021. Daar hopen we onze eerste zetels te behalen en
+gezamenlijk met andere partijen te mogen deelnemen aan het besturen van onze prachtige
+gemeente.
       </p>
-      <a class="a-clear btn btn-dark" href="/word-lid">Word lid</a>
+      <p class="wrapper-main__text">
+        Waarom Dorpsbelangen? We missen een positief kritisch geluid in onze gemeente dat staat voor
+onze mensen en leeft voor onze toekomst, zonder daarbij onze maatschappelijke posities en
+realiteitsgehalte uit het oog te verliezen. Steeds vaker merken we dat de MENS wordt vergeten
+en dat er blijkbaar andere belangen een hoofdrol spelen. Dat gaat wat ons betreft vaak ten koste
+van onze burgers, onze leefomgeving en onze toekomst. Dorpsbelangen wil gezamenlijk met
+onze inwoners de “Dorpse Belangen” voorop stellen en hopen dat op democratische wijze te
+bewerken en volop aandacht te geven aan de mens in zijn omgeving. We hopen dan ook samen
+te komen tot een werkbare verhouding en de burgers de aandacht te geven die ze verdienen
+waarbij inspraak, aanspraak en uitwerking gezamenlijk verlopen. Communicatie is wat ons betreft
+niet 1-dimensionaal en samenwerken bestaat niet uit eenzijdige mededelingen en het “U mag
+tekenen bij het kruisje gehalte.” Die brug zouden wij graag gezamenlijk willen slaan tussen
+bevolking, politiek en het ambtenaren apparaat.
+      </p>
+      <p class="wrapper-main__text">
+        Waarom Dorpsbelangen? Ook constateren wij dat plannetjes vaak niet goed doordacht zijn en
+eigenlijk ook alleen maar 1-dimensionaal werken. Mee eens, of tegen. Naar onze mening zou dat
+beter kunnen. Ten eerste in het voortraject, daar dien je zoveel mogelijk informatie te halen en te
+delen, discussies stimuleren en gezamenlijk te komen tot bepaalde standpunten, te weten het
+kader stellen! Ook worden daarvoor vaak te weinig juiste opdracht omschrijvingen gegeven of
+probleemstellingen gedefinieerd. Dat kan beter en vooral SMARTER! Ten tweede valt het ons op
+dat er vaak geen keuzes worden meegenomen, m.a.w. er is vaak maar 1 oplossing of
+denkrichting bekeken. Dat ondermijnt dan ook vaak de draagkracht van een project/plan. Ten
+derde is het zo dat de gekozen uitwerking “verkocht” dient te worden, inclusief het waarom het
+niet anders is gedaan! Daar wordt jammer genoeg veel te weinig aandacht aan besteed in deze
+Gemeente. Veelal zouden deze antwoorden uit de Raadsvergaderingen gefilterd moeten worden,
+maar helaas. Als de Coalitie gestuurd wordt door “iets” er door heen te drukken en de oppositie
+gestuurd word door “iets af te laten branden” dan merken wij op dat er inhoudelijk geen vuurwerk
+plaats vind. Door dat vuurwerk zouden gedragen en uitgebalanceerde plannen kunnen ontstaan
+die zowel door beide kanten als acceptabel worden verkocht en in de Gemeenschap kan dan het
+mooie Siervuurwerk door iedereen bewonderd worden in de belangen van de Dorpen, de
+Dorpsbelangen.
+      </p>
+      <p class="wrapper-main__text">
+      Waarom Dorpsbelangen? Van ons mag u na bovenstaande verwachten dat wij ons uiterste best
+zullen doen om gezamenlijke en uitgebalanceerde plannen en projecten met de
+dorpsgemeenschap tot een goed einde te brengen. Problemen lossen wij gezamenlijk op.
+Nabuurschap moet een vanzelfsprekend gegeven zijn in en tussen de dorpen. Daar waar onze
+Dorpse Belangen spelen gaan we ze ook oplossen. In onze Visie staat de Mens met zijn belang
+centraal in onze Dorpse Omgeving die deel uitmaakt van de Gemeente Bergen en de grotere
+omringende Regio.
+      </p>
+      <p class="wrapper-main__text">
+        De missie en visie van Dorpsbelangen blijven leidend als meetlat voor de toekomstige
+besluiten. Daarbij wordt het verkiezingsprogramma een blijvend uitgangspunt voor onze
+wensen waarbij wij open blijven staan voor nieuwe ontwikkelingen. Met enthousiaste en
+betrokken mensen in ons team blijven wij opkomen voor de mensen en hun lokale belangen in
+de gehele gemeente Bergen. Dat doen we op structurele basis en daar waar nodig springen we
+bij in projecten en projectgroepen. Daar waar nodig zullen wij Kennis en Visie inbrengen en als
+we daar nog niet over beschikken gaan wij actief op zoek.
+      </p>
+      <p class="wrapper-main__text">
+        Wij vinden het daarom heel leuk als mensen ons een warm hart toedragen en iedereen die mee
+wil werken of mee wil doen, op welke manier dan ook, is van harte welkom!
+      </p>
+      <p class="wrapper-main__text">
+        <strong>
+          Gewoon (mee) doen, Dorpsverlangen in Dorpsbelangen!
+        </strong>
+      </p>
       <hr />
       <h3>Laatste nieuws</h3>
+      <ul class="wrapper-main__articles">
+        <% nieuwsMedia.forEach (artikel => { %>
+          <li>
+            <a href="/nieuws-media/<%= artikel.m_ID %>"><%= artikel.m_ItemTitel %></a>
+          </li>
+        <% }); %>
+      </ul>
     </div>
     <%- include ('includes/footer.include.ejs') %>
   </div>

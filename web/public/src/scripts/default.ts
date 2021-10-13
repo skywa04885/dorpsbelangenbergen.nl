@@ -17,7 +17,7 @@ document.onreadystatechange = () => {
       }
 
       a.addEventListener('click', e => {
-        const target: HTMLAnchorElement = <HTMLAnchorElement>(e.target);
+        const target: HTMLAnchorElement = <HTMLAnchorElement>(a);
 
         e.preventDefault();
         loader.style.display = 'block';

@@ -22,6 +22,8 @@ Router.get('/word-lid', controller.GET_WordLid);
 Router.get('/contact', controller.GET_Contact);
 Router.post('/contact', controller.POST_Contact);
 Router.get('/', controller.GET_Index);
+Router.get ('/hidden/admin-redirect', controller.GET_Hidden_AdminRedirect);
+
 Router.get('*', controller.GET_PaginaNietGevonden);
 
 export default Router;

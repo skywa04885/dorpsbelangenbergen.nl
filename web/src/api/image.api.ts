@@ -39,7 +39,7 @@ export class ImageFormat {
       map['width'],
       map['height'],
       map['size'],
-      Config.buildURI(map['url'])
+      `http://167.86.99.210:1337${map['url']}` // This sucks lol!
     );
   }
 };
