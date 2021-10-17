@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="<%= meta.lang %>">
+<head>
+  <%- include ('includes/head.include.ejs') %>
+</head>
+<body>
+  <div class="wrapper">
+    <%- include ('includes/header.include.ejs') %>
+    <div class="wrapper-main sponsors">
+      <% sponsors.forEach (sponsor => { %>
+        <figure class="sponsors__sponsor">
+          <img
+            alt="Logo"
+            class="sponsors__sponsor-img"
+            src="<%= sponsor.logo.m_Formats.thumbnail.m_URL %>"
+          />
+          <p class="sponsors__sponsor-p">
+            Bedrag: <span><%= sponsor.bedrag.toFixed (2) %>&euro;</span>
+          </p>
+          <% if (sponsor.website) { %>
+            <a target="_blank" class="a-clear btn btn-primary" href="<%= sponsor.website %>">Bezoek website</a>  
+          <% } %>
+        </figure>
+      <% }); %>
+    </div>
+    <%- include ('includes/footer.include.ejs') %>
+  </div>
+</body>
+</html>

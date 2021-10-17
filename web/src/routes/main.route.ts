@@ -19,10 +19,12 @@ Router.get('/ideebus', controller.GET_Ideebus);
 Router.post('/ideebus', controller.POST_IdeeBus);
 Router.get('/leden-pagina', controller.GET_LedenPagina);
 Router.get('/word-lid', controller.GET_WordLid);
+Router.post ('/word-lid', controller.POST_WordLid);
 Router.get('/contact', controller.GET_Contact);
 Router.post('/contact', controller.POST_Contact);
 Router.get('/', controller.GET_Index);
 Router.get ('/hidden/admin-redirect', controller.GET_Hidden_AdminRedirect);
+Router.get ('/sponsors', controller.GET_Sponsors);
 
 Router.get('*', controller.GET_PaginaNietGevonden);
 

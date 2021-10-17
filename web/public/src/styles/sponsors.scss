@@ -1,0 +1,26 @@
+.sponsors {
+    text-align: center;
+
+    & > .sponsors__sponsor {
+        display: inline-block;
+        padding: 1rem;
+        border-radius: 0.2rem;
+        border: 1px solid #e8e8e8;
+
+        & > .sponsors__sponsor-p {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-size: 0.9rem;
+
+            & > span {
+                color: #006b92;
+                font-weight: bold;
+            }
+        }
+
+        & > a {
+            display: inline-block;
+        }
+    }
+}

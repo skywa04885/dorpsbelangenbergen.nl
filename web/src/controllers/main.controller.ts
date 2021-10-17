@@ -8,6 +8,8 @@ import url from 'url';
 import { buildTemplateConfig } from '../render';
 import { NieuwsMediaItem, NieuwsMediaCategorie } from '../api/nieuws-media.api';
 import { createSimpleLogger } from '../logger';
+import { Sponsor, SponsorsAPI } from '../api/SponsorsAPI';
+import { Member, MembersAPI } from '../api/MembersAPI';
 
 const logger: winston.Logger = createSimpleLogger('main_controller');
 const transporterFrom: string = 'webmaster@fannst.nl';
@@ -202,7 +204,7 @@ const GET_Contact = (
   });
 };
 
-const POST_WordLid = (
+const POST_WordLid = async (
   req: express.Request, res: express.Response, 
   next: express.NextFunction
 ) => {
@@ -217,13 +219,91 @@ const POST_WordLid = (
   // Checks if any of the fields is missing.
   if (
     !voornaam || !voorletters || !achternaam || !adres ||
-    !postcode || !plaats || !datum || !telefoonnummer ||
-    !mobiel_telefoonnummer || !email || !raadslidmaatschap ||
-    !bestuurlijke_taak || !specifiek || !individueel_gesprek ||
-    !groepsgesprek
+    !postcode || !plaats || !email || !datum
   ) {
     return res.redirect (301, '/word-lid')
   }
+
+  // Creates the record.
+  const member : Member = new Member (
+    adres,
+    postcode,
+    plaats,
+    new Date (datum),
+    telefoonnummer,
+    mobiel_telefoonnummer,
+    false,
+    `-- Aanvraag
+Raadslidmaatschap: ${raadslidmaatschap}
+Bestuurlijke taak: ${bestuurlijke_taak}
+Specifiek: ${specifiek}
+Invidueel Gesprek: ${individueel_gesprek}
+Groepsgesprek: ${groepsgesprek}`,
+    voornaam,
+    voorletters,
+    achternaam,
+    email
+  );
+
+  await MembersAPI.Save (member);
+
+  // Sends the management email.
+  const subject = `Nieuw lid: ${member.firstName} ${member.lastName}`;
+  ejs.renderFile(path.join(process.cwd(), 'templates', 'word-lid-management.ejs'), {
+    title: subject,
+    extra: {
+      raadslidmaatschap,
+      bestuurlijke_taak,
+      specifiek,
+      individueel_gesprek,
+      groepsgesprek
+    },
+    member
+  }, (err, html) => {
+    if (err) {
+      winston.error(err);
+      return res.redirect(301, '/word-lid?status=templating-error');
+    }
+
+    transporter.sendMail({
+      subject: subject, html,
+      from: transporterFrom,
+      to: 'dorpsbelangenbergenlimburg@gmail.com'
+    }).then(info => {
+      // Sends the client email.
+      const subject = `Welkom bij dorpsbelangen bergen!`;
+      ejs.renderFile(path.join(process.cwd(), 'templates', 'word-lid-client.ejs'), {
+        title: subject,
+        extra: {
+          raadslidmaatschap,
+          bestuurlijke_taak,
+          specifiek,
+          individueel_gesprek,
+          groepsgesprek
+        },
+        member
+      }, (err, html) => {
+        if (err) {
+          winston.error(err);
+          return res.redirect(301, '/word-lid?status=templating-error');
+        }
+    
+        transporter.sendMail({
+          subject: subject, html,
+          from: transporterFrom,
+          to: member.email
+        }).then(info => {
+          res.redirect(301, '/word-lid?status=success');
+        }).catch(err => {
+          winston.error(err);
+          res.redirect(301, '/word-lid?status=sending-error');
+        });
+      });
+    }).catch(err => {
+      winston.error(err);
+      res.redirect(301, '/word-lid?status=sending-error');
+    });
+  });
 };
 
 const POST_IdeeBus = (
@@ -250,7 +330,7 @@ const POST_IdeeBus = (
 
     transporter.sendMail({
       subject: subject, html,
-      from: transporterFrom,
+      from: 'dorpsbelangenbergenlimburg@gmail.com',
       to: 'info@dorpsbelangenbergen.nl'
     }).then(info => {
       res.redirect(301, '/ideebus?status=success');
@@ -291,7 +371,7 @@ const POST_Contact = (
 
     transporter.sendMail({
       subject: clientSubject, headers, html,
-      from: transporterFrom,
+      from: 'dorpsbelangenbergenlimburg@gmail.com',
       to: email
     }).then(info => {
       // Sends the email to the admin of dorpsbelangenbergen
@@ -403,7 +483,23 @@ const GET_Hidden_AdminRedirect = (
   req: express.Request, res: express.Response, 
   next: express.NextFunction
 ) => {
-  res.redirect (`http://${req.hostname}:1337/admin`);
+  const parsedUrl : url.UrlWithParsedQuery = url.parse (req.url, true);
+
+  const path = parsedUrl.query.path as string ?? '/admin';
+  res.redirect (`http://${req.hostname}:1337${path}`);
+};
+
+const GET_Sponsors = async (
+  req: express.Request, res: express.Response, 
+  next: express.NextFunction
+) => {
+  const sponsors : Sponsor[] = await SponsorsAPI.FetchAll ();
+
+  buildTemplateConfig('Sponsors', {
+    sponsors: sponsors.filter(sponsor => sponsor.zichtbaar)
+  }, {
+    stylesheets: [ 'sponsors.css' ]
+  }).then((data: any) => res.render('sponsors.view.ejs', data));
 };
 
 export { 
@@ -411,5 +507,6 @@ export {
   GET_UwPartij_FractieCommissie, GET_UwPartij_Standpunten,
   GET_UwPartij_Dorpen, GET_LedenPagina, GET_PaginaNietGevonden,
   GET_NieuwsMedia, GET_NieuwsItem, GET_Ideebus, GET_WordLid,
-  GET_Contact, POST_Contact, POST_IdeeBus, GET_Hidden_AdminRedirect
+  GET_Contact, POST_Contact, POST_IdeeBus, GET_Hidden_AdminRedirect,
+  GET_Sponsors, POST_WordLid
 };

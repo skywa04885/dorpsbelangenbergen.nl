@@ -25,6 +25,9 @@
     },
     "bedrag": {
       "type": "decimal"
+    },
+    "website": {
+      "type": "text"
     }
   }
 }

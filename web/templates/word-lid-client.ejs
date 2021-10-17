@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <%- include('includes/head.ejs') %>
+        <style>
+            .wrapper__wordlid-data {
+                color: #3a3a3a;
+                font-size: 0.9rem;
+            }
+
+            .wrapper__wordlid-data > strong {
+                color: #222222;
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+
+            .wrapper__wordlid-data > em {
+                color: #4d4d4d;
+                font-style: italic;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <%- include('includes/header.ejs') %>
+            <div class="wrapper__wordlid wrapper__content">
+                <p class="wrapper__wordlid-data">
+                    Beste heer of mevrouw,<br/><br />
+                    Welkom bij Dorpsbelangen Bergen (L).<br /><br />
+                    Uw lidmaatschap staat momenteel op niet actief, dit houdt in
+                    dat u nog de jaarlijkse betaling moet doen van minimaal 15 euro.<br /><br />
+                    U kunt dit geld overmaken naar deze IBAN: NL11 RBRB 0787 7003 63<br />
+                    Geef de betaling de volgende naam zodat wij hem kunnen identificeren: "lid:<%= member.id %>". <br />
+                    Als u de betaling heeft gedaan, zullen wij uw lidmaatschap binnen enkele dagen op actief zetten. <br /><br />
+                    Met vriendelijke groet: <br />
+                    Dorpsbelangen Bergen (L)
+                </p>
+                <hr />
+                <p class="wrapper__wordlid-data">
+                    <strong>Gegevens: </strong>
+                    <br />
+                    Address: <em><%= member.address %></em>
+                    <br />
+                    Postcode: <em><%= member.postal %></em>
+                    <br />
+                    Plaats: <em><%= member.town %></em>
+                    <br />
+                    Datum: <em><%= member.date %></em>
+                    <br />
+                    Telefoon: <em><%= member.phone %></em>
+                    <br />
+                    Mobiel: <em><%= member.mobile %></em>
+                    <br />
+                    Notities: <em><%= member.notes.length > 64 ? member.notes.substring (0, 64) + '...' : member.notes %></em>
+                    <br />
+                    Voornaam: <em><%= member.firstName %></em>
+                    <br />
+                    Voorletters: <em><%= member.middleName %></em>
+                    <br />
+                    Achternaam: <em><%= member.lastName %></em>
+                    <br />
+                    ID: <em><%= member.id %></em>
+                </p>
+                <p class="wrapper__wordlid-data">
+                    <strong>Extra Gegevens:</strong>
+                    <br />
+                    Raadslidmaatschap: <em><%= extra.raadslidmaatschap %></em>
+                    <br />
+                    Bestuurlijke taak: <em><%= extra.bestuurlijke_taak %></em>
+                    <br />
+                    Specifiek <em><%= extra.specifiek %></em>
+                    <br />
+                    Invidueel gesprek: <em><%= extra.individueel_gesprek %></em>
+                    <br />
+                    Groepsgesprek <em><%= extra.groepsgesprek %></em>
+                </p>
+            </div>
+            <%- include('includes/footer.ejs') %>
+        </div>
+    </body>
+</html>

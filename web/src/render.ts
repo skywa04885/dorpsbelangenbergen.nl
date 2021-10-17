@@ -81,6 +81,9 @@ const buildTemplateConfig = (title: string, vars: any = {}, config: {
             }, {
               title: 'Doneren',
               href: '#donate'
+            }, {
+              title: 'Sponsors',
+              href: '/sponsors'
             }
           ]
         }
