@@ -12,8 +12,8 @@ export class NieuwsMediaItem {
   public m_ItemContent: string;
   public m_ItemDate: Date;
   public m_Categorie: NieuwsMediaCategorie | null;
-  public m_ItemImages: Image[];
-  public m_ItemThumbnail: Image;
+  public m_ItemImages: Image[] | null;
+  public m_ItemThumbnail: Image | null;
   public m_User: User | null;
   public m_ID: number;
 
@@ -22,8 +22,8 @@ export class NieuwsMediaItem {
     m_ItemContent: string,
     m_ItemDate: Date,
     m_Categorie: NieuwsMediaCategorie | null,
-    m_ItemImages: Image[],
-    m_ItemThumbnail: Image,
+    m_ItemImages: Image[] | null,
+    m_ItemThumbnail: Image | null,
     m_User: User | null,
     m_ID: number
   ) {
@@ -43,8 +43,8 @@ export class NieuwsMediaItem {
       map['item_content'],
       map['item_datum'],
       NieuwsMediaCategorie.fromMap(map['nieuws_media_category']),
-      [ Image.fromMap(map['item_images']) ],
-      Image.fromMap(map['item_thumbnail']),
+      map['item_images'] ? [Image.fromMap(map['item_images'])] : null,
+      map['item_thumbnail'] ? Image.fromMap(map['item_thumbnail']) : null,
       User.fromMap(map['user']),
       map['id']
     );

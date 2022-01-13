@@ -486,7 +486,7 @@ const GET_Hidden_AdminRedirect = (
   const parsedUrl : url.UrlWithParsedQuery = url.parse (req.url, true);
 
   const path = parsedUrl.query.path as string ?? '/admin';
-  res.redirect (`http://${req.hostname}:1337${path}`);
+  res.redirect (`http://167.86.99.210:1337${path}`);
 };
 
 const GET_Sponsors = async (

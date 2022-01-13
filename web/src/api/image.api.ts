@@ -52,10 +52,10 @@ export class Image {
   public m_Width: number;
   public m_Height: number;
   public m_Formats: {
-    thumbnail: ImageFormat,
-    large: ImageFormat,
-    medium: ImageFormat,
-    small: ImageFormat
+    thumbnail: ImageFormat | null,
+    large: ImageFormat | null,
+    medium: ImageFormat | null,
+    small: ImageFormat | null
   };
 
   public constructor(
@@ -66,10 +66,10 @@ export class Image {
     m_Width: number,
     m_Height: number,
     m_Formats: {
-      thumbnail: ImageFormat,
-      large: ImageFormat,
-      medium: ImageFormat,
-      small: ImageFormat
+      thumbnail: ImageFormat | null,
+      large: ImageFormat | null,
+      medium: ImageFormat | null,
+      small: ImageFormat | null
     }
   ) {
     this.m_Id = m_Id;
@@ -90,10 +90,10 @@ export class Image {
       map['width'],
       map['height'],
       {
-        thumbnail: ImageFormat.fromMap(map['formats']['thumbnail']),
-        large: ImageFormat.fromMap(map['formats']['large']),
-        medium: ImageFormat.fromMap(map['formats']['medium']),
-        small: ImageFormat.fromMap(map['formats']['small'])
+        thumbnail: map['formats']['thumbnail'] ? ImageFormat.fromMap(map['formats']['thumbnail']) : null,
+        large: map['formats']['large'] ? ImageFormat.fromMap(map['formats']['large']) : null,
+        medium: map['formats']['medium'] ? ImageFormat.fromMap(map['formats']['medium']) : null,
+        small: map['formats']['small'] ? ImageFormat.fromMap(map['formats']['small']) : null
       }
     )
   };

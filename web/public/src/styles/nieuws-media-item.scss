@@ -12,12 +12,46 @@
     color: #6d6d6d;
     font-size: 1rem;
     display: block;
-    line-height: 1.4rem;
     margin-bottom: 0.6rem;
     font-family: 'Roboto', sans-serif;
 
-    & > p {
+    & > h1 {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #222;
       margin-bottom: 1rem;
+    }
+
+    & > p {
+      line-height: 1.4rem;
+      margin-bottom: .5rem;
+      margin-top: .5rem;
+    }
+
+    & > strong, & > p > strong {
+      font-weight: bold;
+    }
+
+    & > ol {
+      counter-reset: section;
+
+      & > li::before {
+        content: counter(section);
+        counter-increment: section;
+        margin-right: .5rem;
+        color: #222;
+        font-weight: bold;
+        font-size: .9rem;
+      }
+
+      & > li {
+        padding-left: 1rem;
+
+        &:not(:last-child)
+        {
+          margin-bottom: .5rem;
+        }
+      }
     }
   }
 

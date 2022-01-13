@@ -11,7 +11,7 @@
         <% nieuws_media.forEach(item => { %>
           <figure class="nieuws-media-list__item">
             <div class="nieuws-media-list__item-image">
-              <img src="<%= item.m_ItemThumbnail.m_Formats.thumbnail.m_URL %>" />
+              <img width="200px" src="<%= item.m_ItemThumbnail ? item.m_ItemThumbnail.m_Formats.thumbnail.m_URL : '/static/images/dummy.jpg' %>" />
             </div>
             <div class="nieuws-media-list__item-content">
               <p class="nieuws-media-list__item__title">

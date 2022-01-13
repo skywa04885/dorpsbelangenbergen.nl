@@ -13,8 +13,8 @@ const buildTemplateConfig = (title: string, vars: any = {}, config: {
           title,
           seo_title: title, 
           seo_description: config.description ?? `Deze pagina '${title}' heeft geen specifieke beschijving`,
-          seo_keywords: [ 'dorpsbelangen', 'bergen', 'limburg', 'politiek', 'partij',  ].concat(config.keywords ?? []),
-          seo_author: config.author ?? 'Luke A.C.A. Rieff (webmaster@fannst.nl)',
+          seo_keywords: [ 'dorpsbelangen', 'afferden', 'well', 'aijen', 'nieuw bergen', 'siebengewald', 'wellerlooi', 'nieuw bergen', 'bergen', 'limburg', 'politiek', 'partij',  ].concat(config.keywords ?? []),
+          seo_author: config.author ?? 'None',
           seo_generator: 'NodeJS with Strapi CMS',
           lang: 'nl'
         },
